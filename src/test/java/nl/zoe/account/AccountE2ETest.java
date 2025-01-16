@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static nl.zoe.account.utils.JsonUtils.asJsonString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -28,9 +27,17 @@ public class AccountE2ETest {
                         .content(asJsonString(new AccountDTO("test_id")))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                        .andDo(print())
                         .andExpect(status().isCreated())
-                .andDo( print())
                         .andExpect( jsonPath("$.customerId").value("test_id"));
+    }
+
+    @Test
+    public void givenInvalidParametersWhenCreateAccountThenBadRequest() throws Exception {
+        mockMvc.perform(
+                post("/api/v1/accounts")
+                        .content(asJsonString(new AccountDTO()))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isBadRequest());
     }
 }

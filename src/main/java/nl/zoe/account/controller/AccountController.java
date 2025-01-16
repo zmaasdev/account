@@ -1,5 +1,6 @@
 package nl.zoe.account.controller;
 
+import jakarta.validation.Valid;
 import nl.zoe.account.dto.AccountDTO;
 import nl.zoe.account.service.AccountService;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class AccountController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public AccountDTO create(@RequestBody AccountDTO accountDTO) {
+    public AccountDTO create(@RequestBody @Valid AccountDTO accountDTO) {
         return this.accountService.create(accountDTO);
     }
 }
