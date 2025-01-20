@@ -23,7 +23,7 @@ public class AccountService {
     public AccountDTO create(AccountDTO accountDTO) {
         Account newAccount = accountMapper.accountDTOToAccount(accountDTO);
         if (BigDecimalUtils.isGreaterThanZero(accountDTO.getInitialCredit())) {
-            transactionService.createTransaction(newAccount.getCustomerId(), newAccount.getInitialCredit());
+            transactionService.createTransaction(newAccount.getId(), newAccount.getBalance());
         }
         return this.accountMapper.accountToAccountDTO(this.accountRepository.save(newAccount));
     }
