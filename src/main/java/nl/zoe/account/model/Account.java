@@ -7,6 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 public class Account {
@@ -15,4 +17,5 @@ public class Account {
     private String id;
     @NotBlank(message = "Customer ID is required")
     private String customerId;
+    private BigDecimal initialCredit;
 }

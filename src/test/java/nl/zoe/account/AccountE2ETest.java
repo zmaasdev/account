@@ -8,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static nl.zoe.account.utils.JsonUtils.asJsonString;
+import java.math.BigDecimal;
+
+import static nl.zoe.account.utils.HttpClient.asJsonString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,7 +26,7 @@ public class AccountE2ETest {
     public void whenCreateAccountThenAccountIsCreated() throws Exception {
         mockMvc.perform(
                 post("/api/v1/accounts")
-                        .content(asJsonString(new AccountDTO("test_id")))
+                        .content(asJsonString(new AccountDTO("test_id", BigDecimal.ZERO)))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                         .andExpect(status().isCreated())
