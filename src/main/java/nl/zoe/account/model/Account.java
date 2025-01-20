@@ -17,5 +17,5 @@ public class Account {
     private String id;
     @NotBlank(message = "Customer ID is required")
     private String customerId;
-    private BigDecimal initialCredit;
+    private BigDecimal balance;
 }
