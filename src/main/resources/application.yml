@@ -1,1 +1,15 @@
-spring.application.name=account
+spring:
+  cloud:
+    function:
+      definition: poll
+    stream:
+      kafka:
+        binder:
+          configuration:
+            auto:
+              offset:
+                reset: earliest
+      bindings:
+        poll-in-0:
+          destination: transaction-topic
+          group: transaction-group
