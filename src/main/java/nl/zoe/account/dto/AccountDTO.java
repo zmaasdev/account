@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -14,4 +15,7 @@ public class AccountDTO {
     @NotBlank(message = "Customer ID is required")
     private String customerId;
     private BigDecimal initialCredit;
+    private String firstName;
+    private String lastName;
+    private LocalDateTime dateOfBirth;
 }

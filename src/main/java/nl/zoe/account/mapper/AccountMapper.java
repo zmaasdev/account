@@ -8,9 +8,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface AccountMapper {
 
-    @Mapping(target = "initialCredit", source = "balance")
+    @Mapping(target = "initialCredit", ignore = true)
     AccountDTO accountToAccountDTO(Account account);
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "balance", source = "initialCredit")
+    @Mapping(target = "createdAt", ignore = true)
     Account accountDTOToAccount(AccountDTO accountDTO);
 }
