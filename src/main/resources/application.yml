@@ -1,7 +1,5 @@
 spring:
   cloud:
-    function:
-      definition: poll
     stream:
       kafka:
         binder:
@@ -13,3 +11,5 @@ spring:
         poll-in-0:
           destination: transaction-topic
           group: transaction-group
+transaction:
+  topic: transaction-topic

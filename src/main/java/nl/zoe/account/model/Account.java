@@ -6,8 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -17,5 +18,9 @@ public class Account {
     private String id;
     @NotBlank(message = "Customer ID is required")
     private String customerId;
-    private BigDecimal balance;
+    private String firstName;
+    private String lastName;
+    private LocalDateTime dateOfBirth;
+    @CreatedDate
+    private LocalDateTime createdAt;
 }
