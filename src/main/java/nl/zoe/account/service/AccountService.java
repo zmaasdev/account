@@ -1,8 +1,9 @@
 package nl.zoe.account.service;
 
 import lombok.RequiredArgsConstructor;
-import nl.zoe.account.event.TransactionEvent;
+import lombok.extern.slf4j.Slf4j;
 import nl.zoe.account.dto.AccountDTO;
+import nl.zoe.account.event.TransactionEvent;
 import nl.zoe.account.mapper.AccountMapper;
 import nl.zoe.account.model.Account;
 import nl.zoe.account.repository.AccountRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AccountService {
@@ -26,7 +28,9 @@ public class AccountService {
     public AccountDTO create(AccountDTO accountDTO) {
         Account newAccount = this.accountRepository.save(accountMapper.accountDTOToAccount(accountDTO));
         if (BigDecimalUtils.isGreaterThanZero(accountDTO.getInitialCredit())) {
-            streamBridge.send(topic, new TransactionEvent(newAccount.getId(), accountDTO.getInitialCredit(), LocalDateTime.now()));
+            if (!streamBridge.send(topic, new TransactionEvent(newAccount.getId(), accountDTO.getInitialCredit(), LocalDateTime.now()))) {
+                log.debug("The transaction event was not successfully delivered");
+            }
         }
         return this.accountMapper.accountToAccountDTO(newAccount);
     }

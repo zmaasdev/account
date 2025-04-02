@@ -7,6 +7,18 @@ spring:
             auto:
               offset:
                 reset: earliest
+            producer:
+              acks: 1
+              retries: 3
+              retry:
+                backoff:
+                  ms: 1000
+              enable:
+                idempotence: true
+              transaction:
+                id: transaction-id
+                timeout:
+                  ms: 10000
       bindings:
         poll-in-0:
           destination: transaction-topic
