@@ -56,3 +56,15 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.bootBuildImage {
+	imageName = "${imageName}"
+	publish = true
+	docker {
+		publishRegistry {
+			url = dockerUrl
+			username = dockerUsername
+			password = dockerPassword
+		}
+	}
+}
