@@ -20,6 +20,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
       - name: Build with Gradle
         run: gradle build
-      - name: Build Docker image
-        run: gradle bootBuildImage --imageName=maasmai/account -PdockerUrl=docker.io/maasmai/account -PdockerUsername=${{ vars.DOCKERHUB_USERNAME }} -PdockerPassword=${{ secrets.DOCKERHUB_TOKEN }}
-
+      - name: Build Docker linux/arm64 image
+        run: gradle bootBuildImage --imageName=maasmai/account --imagePlatform="linux/arm64" -PdockerUrl=docker.io/maasmai/account -PdockerUsername=${{ vars.DOCKERHUB_USERNAME }} -PdockerPassword=${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Docker linux/amd64 image
+        run: gradle bootBuildImage --imageName=maasmai/account --imagePlatform="linux/amd64" -PdockerUrl=docker.io/maasmai/account -PdockerUsername=${{ vars.DOCKERHUB_USERNAME }} -PdockerPassword=${{ secrets.DOCKERHUB_TOKEN }}
