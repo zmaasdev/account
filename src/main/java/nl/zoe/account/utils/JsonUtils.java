@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-public class HttpClient {
+public class JsonUtils {
 
     public static String asJsonString(Object object) throws JsonProcessingException {
         return new ObjectMapper()
