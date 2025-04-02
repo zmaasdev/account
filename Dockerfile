@@ -1,5 +1,5 @@
 FROM amazoncorretto:23-alpine3.17-jdk
 ARG JAR_FILE=*-SNAPSHOT.jar
 WORKDIR /app
-COPY build/libs/${JAR_FILE} /app/app.jar
+COPY ${JAR_FILE} /app/app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
