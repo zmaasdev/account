@@ -56,3 +56,19 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.bootBuildImage {
+	if (hasProperty('dockerUrl') && hasProperty('dockerUsername') && hasProperty('dockerPassword')) {
+		imageName = "${imageName}"
+		publish = true
+		docker {
+			publishRegistry {
+				url = dockerUrl
+				username = dockerUsername
+				password = dockerPassword
+			}
+		}
+	} else {
+		print('dockerUrl dockerUsername and dockerPassword are missing ')
+	}
+}
